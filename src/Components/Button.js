@@ -8,7 +8,7 @@ function Button(props) {
     if (props.direction) {
         return (
             <>
-                <button className="btn btn-secondary" onClick={()=> {
+                <button className={`btn btn-primary ${props.className}`} onClick={()=> {
                     navigate(props.direction)
                 }}>{props.text}</button>
             </>
@@ -16,7 +16,7 @@ function Button(props) {
     }
     return (
         <>
-            <button className="btn btn-secondary">{props.text}</button>
+            <button className={`btn btn-primary ${props.className}`}>{props.text}</button>
         </>
     );
 
@@ -25,6 +25,7 @@ function Button(props) {
 Button.defaultProps = {
     direction: null,
     text: "",
+    className: '',
 }
 
 export default Button;

@@ -8,6 +8,7 @@ module.exports = {
   },
   colors: {
     "primary": "#75a083",
+    "secondary": "#d0ff8e",
   },
   plugins: [require("daisyui")],
   daisyui: {
@@ -15,6 +16,7 @@ module.exports = {
       {
         mytheme: {
           "primary": "#75a083",
+          "secondary": "#d0ff8e",
         },
       },
     ],

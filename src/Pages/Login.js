@@ -10,12 +10,14 @@ function Login() {
             <Input type="password" placeholder="Mot de passe" className="mx-auto"/>
             <span className="label-text mx-auto cursor-pointer">Mot de passe oublié ?</span>
             <div className="flex justify-center pt-2">
-                <button className="btn btn-primary">Connexion</button>
+                {/*<button className="btn btn-primary">Connexion</button>*/}
+                <Button text="Connexion" />
+
             </div>
             <hr />
             <span className="label-text mx-auto">Pas encore de compte ?</span>
             <div className="flex justify-center pt-2">
-                <Button direction="/Sign-in" text="Rejoindre" />
+                <Button className="btn-outline" direction="/Sign-in" text="Rejoindre" />
             </div>
         </>
     );

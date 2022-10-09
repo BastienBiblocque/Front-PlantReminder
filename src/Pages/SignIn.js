@@ -16,12 +16,12 @@ function SignIn() {
             <Input placeholder="Adresse mail" className="mx-auto"/>
             <Input type="password" placeholder="Mot de passe" className="mx-auto"/>
             <div className="flex justify-center pt-2">
-                <button className="btn btn-primary">Inscription</button>
+                <Button text="Inscription" />
             </div>
             <hr />
             <span className="label-text mx-auto">Déjà un compte ?</span>
             <div className="flex justify-center pt-2">
-                <Button direction="/" text="Se connecter" />
+                <Button className="btn-outline" direction="/" text="Se connecter" />
             </div>
         </>
     );
