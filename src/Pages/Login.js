@@ -1,7 +1,6 @@
 import '../App.css';
 import React from "react";
 import Input from "../Components/Input";
-import { useNavigate } from "react-router-dom";
 import Button from "../Components/Button";
 function Login() {
     return (
