@@ -1,6 +1,7 @@
 import '../App.css';
 import React from "react";
 import {useNavigate} from "react-router-dom";
+import {Audio, Triangle} from "react-loader-spinner";
 
 function Button(props) {
     const navigate = useNavigate();
@@ -10,13 +11,33 @@ function Button(props) {
             <>
                 <button className={`btn btn-primary ${props.className}`} onClick={()=> {
                     navigate(props.direction)
-                }}>{props.text}</button>
+                }}>
+                    {props.isLoading ? (<Triangle
+                        height="20"
+                        width="20"
+                        radius="9"
+                        color="black"
+                        ariaLabel="loading"
+                        wrapperStyle
+                        wrapperClass
+                    />) : props.text}
+                </button>
             </>
         );
     }
     return (
         <>
-            <button onClick={props.onClick} className={`btn btn-primary ${props.className}`}>{props.text}</button>
+            <button onClick={props.onClick} className={`btn btn-primary ${props.className}`}>
+                {props.isLoading ? (<Triangle
+                    height="20"
+                    width="20"
+                    radius="9"
+                    color="black"
+                    ariaLabel="loading"
+                    wrapperStyle
+                    wrapperClass
+                />) : props.text}
+            </button>
         </>
     );
 

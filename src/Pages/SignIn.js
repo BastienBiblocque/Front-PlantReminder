@@ -1,39 +1,48 @@
-import '../App.css';
 import React, {useState} from "react";
 import Input from "../Components/Input";
 import {NotificationManager} from 'react-notifications';
 import Button from "../Components/Button";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 function SignIn() {
+    const navigate = useNavigate();
 
     const [name, setName] = useState(null);
     const [firstName, setFirstName] = useState(null);
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
 
+    const [isLoading, setIsLoading] = useState(false);
 
     const sign = () => {
         if (name && firstName && email && password) {
-            //regex password
-            if (password) {
-                axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`,{
-                    name,
-                    firstName,
-                    email,
-                    password,
-                })
-                    .then(function (response) {
-                        // handle success
-                        console.log(response);
+            setIsLoading(true);
+            const regexMail = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$');
+            if (regexMail.test(email.toString())) {
+                const regexPassword = new RegExp('^[a-zA-Z]{6,}$');
+                if (regexPassword.test(password.toString())) {
+                    axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`,null,{
+                        params:{ name, firstName, email, password }
                     })
-                    .catch(function (error) {
-                        // handle error
-                        console.log(error);
-                    })
+                        .then(() =>{
+                            NotificationManager.success('Compte créer avec succès, vous pouvez vous connecter.');
+                            navigate('/login');
+                        })
+                        .catch(()=> {
+                            setIsLoading(false);
+                            NotificationManager.error('Un utilisateur existe avec cette adresse email, essayer de vous connecter.');
+                        })
+                } else {
+                    setIsLoading(false);
+                    NotificationManager.error('Veuillez choisir un mot de passe plus long.');
+                }
             } else {
-                NotificationManager.error('Veuillez choisir un mot de passe sécurisé.');
+                setIsLoading(false);
+                NotificationManager.error('Veuillez entrer une adresse email valide.');
             }
+            //regex password
+
         } else {
             NotificationManager.error('Information manquante.');
         }
@@ -49,12 +58,12 @@ function SignIn() {
             <Input onChange={(e)=>setEmail(e.target.value)} placeholder="Adresse mail" className="mx-auto"/>
             <Input onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Mot de passe" className="mx-auto"/>
             <div className="flex justify-center pt-2">
-                <Button text="Inscription" onClick={sign} />
+                <Button text="Inscription" onClick={sign} isLoading={isLoading} />
             </div>
             <hr />
             <span className="label-text mx-auto">Déjà un compte ?</span>
             <div className="flex justify-center pt-2">
-                <Button className="btn-outline" direction="/" text="Se connecter" />
+                <Button className="btn-outline" direction="/login" text="Se connecter" />
             </div>
         </>
     );

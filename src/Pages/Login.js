@@ -1,23 +1,54 @@
-import '../App.css';
-import React from "react";
+import React, {useState} from "react";
 import Input from "../Components/Input";
 import Button from "../Components/Button";
+import axios from "axios";
+import {NotificationManager} from "react-notifications";
+import jwt_decode from "jwt-decode";
+import {useNavigate} from "react-router-dom";
+
 function Login() {
+    const navigate = useNavigate();
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
+
+    const login = () => {
+        setIsLoading(true);
+        if (email && password) {
+            axios.post(`${process.env.REACT_APP_API_URL}/auth/login`,null,{
+                params:{ email, password }
+            })
+                .then((response) =>{
+                    const userData = jwt_decode(response.data.token);
+                    userData.jwt = response.data.token
+                    sessionStorage.setItem("userData", JSON.stringify(userData));
+                    navigate('/');
+                })
+                .catch(()=> {
+                    setIsLoading(false);
+                    NotificationManager.error("Erreur d'authentification.");
+                })
+        } else {
+            setIsLoading(false);
+            NotificationManager.error('Veuillez remplir votre mail et mot de passe.');
+        }
+    }
+
     return (
         <>
             <h1 className="card-title text-primary mx-auto">Se connecter</h1>
-            <Input placeholder="Adresse mail" className="mx-auto"/>
-            <Input type="password" placeholder="Mot de passe" className="mx-auto"/>
+            <Input onChange={(e)=>setEmail(e.target.value)} placeholder="Adresse mail" className="mx-auto"/>
+            <Input onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Mot de passe" className="mx-auto"/>
             <span className="label-text mx-auto cursor-pointer">Mot de passe oublié ?</span>
             <div className="flex justify-center pt-2">
-                {/*<button className="btn btn-primary">Connexion</button>*/}
-                <Button text="Connexion" />
-
+                <Button text="Connexion" onClick={login} isLoading={isLoading} />
             </div>
             <hr />
             <span className="label-text mx-auto">Pas encore de compte ?</span>
             <div className="flex justify-center pt-2">
-                <Button className="btn-outline" direction="/Sign-in" text="Rejoindre" />
+                <Button className="btn-outline" direction="/sign-in" text="Rejoindre" />
             </div>
         </>
     );
