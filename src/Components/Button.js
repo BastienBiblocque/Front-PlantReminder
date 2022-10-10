@@ -16,7 +16,7 @@ function Button(props) {
     }
     return (
         <>
-            <button className={`btn btn-primary ${props.className}`}>{props.text}</button>
+            <button onClick={props.onClick} className={`btn btn-primary ${props.className}`}>{props.text}</button>
         </>
     );
 
