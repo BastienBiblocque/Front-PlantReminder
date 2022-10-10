@@ -6,17 +6,21 @@ import QuatreCentQuatre from "./Pages/404";
 import LoginLayout from "./Components/Layout/Login";
 import IndexLogin from "./Pages/IndexLogin";
 import AppLayout from "./Components/Layout/App";
+import IndexApp from "./Pages/IndexApp";
+import Logout from "./Pages/Logout";
 
 export default function App() {
     return (
         <Routes>
             <Route path="/" element={<LoginLayout />}>
                 <Route index element={<IndexLogin />} />
-                <Route path="login"index element={<Login />} />
+                <Route path="login" element={<Login />} />
                 <Route path="sign-in" element={<SignIn />} />
             </Route>
             <Route path="/app" element={<AppLayout />}>
-                <Route index element={<IndexLogin />} />
+                <Route index element={<IndexApp />} />
+                <Route path="logout" element={<Logout />} />
+
             </Route>
             <Route path="*" element={<QuatreCentQuatre />} />
         </Routes>
