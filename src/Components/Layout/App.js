@@ -20,7 +20,7 @@ function AppLayout() {
     },[isLog])
 
     return (
-        <div className="grid place-items-center h-screen relative">
+        <div className="grid min-h-screen ">
             <UserData setIsLog={setIsLog} setUserData={setUserData}/>
             <NotificationContainer/>
             <Navbar userData={userData} />

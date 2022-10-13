@@ -1,49 +1,37 @@
-import React from "react";
+import React, {useEffect} from "react";
+import FlowerCard from "../Components/FlowerCard";
+import Button from "../Components/Button";
+import AddFlowerModal from "../Components/Modal/AddFlower";
 
 
 function IndexApp() {
+
+    const flower = {
+        name:"Orchidée",
+        icon:"pot",
+        description: "Plante de la chambre",
+        next: new Date(),
+    }
+
+    const [changeMade, setChangeMade] = React.useState(false);
+
+    useEffect(()=>{
+        if (changeMade) {
+            changeMade(false);
+        }
+    },[changeMade])
+
     return (
-        <div className="grid md:grid-cols-4 gap-4 max-w-5xl px-4 py-24 md:pb-12">
-            <div className="card bg-base-100 shadow-xl">
-                <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes"/></figure>
-                <div className="card-body">
-                    <h2 className="card-title">Shoes!</h2>
-                    <p>If a dog chews shoes whose shoes does he choose?</p>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
-                    </div>
+        <div className="flex">
+            <div className="pt-16 space-y-4 gap-4 w-full px-4 md:grid md:grid-cols-2 md:space-y-0 z-20 pb-16">
+                <div className="col-span-2 w-full grid">
+                    <label htmlFor="my-modal-4" className="btn btn-primary justify-self-center md:justify-self-start">Ajouter une fleur</label>
                 </div>
+                <FlowerCard flower={flower} />
+                <FlowerCard />
+                <FlowerCard />
             </div>
-            <div className="card bg-base-100 shadow-xl">
-                <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes"/></figure>
-                <div className="card-body">
-                    <h2 className="card-title">Shoes!</h2>
-                    <p>If a dog chews shoes whose shoes does he choose?</p>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
-                    </div>
-                </div>
-            </div>
-            <div className="card bg-base-100 shadow-xl">
-                <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes"/></figure>
-                <div className="card-body">
-                    <h2 className="card-title">Shoes!</h2>
-                    <p>If a dog chews shoes whose shoes does he choose?</p>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
-                    </div>
-                </div>
-            </div>
-            <div className="card bg-base-100 shadow-xl">
-                <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes"/></figure>
-                <div className="card-body">
-                    <h2 className="card-title">Shoes!</h2>
-                    <p>If a dog chews shoes whose shoes does he choose?</p>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
-                    </div>
-                </div>
-            </div>
+            <AddFlowerModal setChangeMade={setChangeMade}/>
         </div>
     );
 }

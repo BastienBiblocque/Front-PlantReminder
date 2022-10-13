@@ -21,19 +21,30 @@ function Login() {
                 params:{ email, password }
             })
                 .then((response) =>{
-                    const userData = jwt_decode(response.data.token);
-                    userData.jwt = response.data.token
-                    sessionStorage.setItem("userData", JSON.stringify(userData));
-                    navigate('/');
+                    throwPostSuccess(response);
                 })
                 .catch(()=> {
-                    setIsLoading(false);
-                    NotificationManager.error("Erreur d'authentification.");
+                    throwApiError()
                 })
-        } else {
-            setIsLoading(false);
-            NotificationManager.error('Veuillez remplir votre mail et mot de passe.');
-        }
+        } else
+            throwFormError()
+    }
+
+    function throwPostSuccess(response) {
+        const userData = jwt_decode(response.data.token);
+        userData.jwt = response.data.token
+        sessionStorage.setItem("userData", JSON.stringify(userData));
+        navigate('/');
+    }
+
+    function throwFormError(){
+        setIsLoading(false);
+        NotificationManager.error('Veuillez remplir tous les champs.');
+    }
+
+    function throwApiError(){
+        setIsLoading(false);
+        NotificationManager.error("Erreur d'authentification.");
     }
 
     return (

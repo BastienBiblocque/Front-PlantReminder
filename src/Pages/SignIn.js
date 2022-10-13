@@ -26,26 +26,38 @@ function SignIn() {
                         params:{ name, firstName, email, password }
                     })
                         .then(() =>{
-                            NotificationManager.success('Compte créer avec succès, vous pouvez vous connecter.');
-                            navigate('/login');
+                            throwPostSuccess();
                         })
                         .catch(()=> {
-                            setIsLoading(false);
-                            NotificationManager.error('Un utilisateur existe avec cette adresse email, essayer de vous connecter.');
+                            throwMailAlreadyExistError();
                         })
-                } else {
-                    setIsLoading(false);
-                    NotificationManager.error('Veuillez choisir un mot de passe plus long.');
-                }
-            } else {
-                setIsLoading(false);
-                NotificationManager.error('Veuillez entrer une adresse email valide.');
-            }
-            //regex password
-
+                } else
+                    throwPasswordToShort()
+            } else
+                throwInvalidMail()
         } else {
             NotificationManager.error('Information manquante.');
         }
+    }
+
+    function throwPostSuccess() {
+        NotificationManager.success('Compte créer avec succès, vous pouvez vous connecter.');
+        navigate('/login');
+    }
+
+    function throwPasswordToShort() {
+        NotificationManager.error('Veuillez choisir un mot de passe plus long.');
+        setIsLoading(false);
+    }
+
+    function throwInvalidMail() {
+        NotificationManager.error('Veuillez entrer une adresse email valide.');
+        setIsLoading(false);
+    }
+
+    function throwMailAlreadyExistError() {
+        setIsLoading(false);
+        NotificationManager.error("Cette adresse mail est déjà utilisée.");
     }
 
     return (
