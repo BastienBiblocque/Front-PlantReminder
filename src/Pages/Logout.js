@@ -7,16 +7,16 @@ function Logout() {
     const navigate = useNavigate();
 
     useEffect(()=>{
-        setTimeout(()=>{
-            sessionStorage.clear();
-            navigate('/')
-        },2000)
+        logout()
     },[])
 
+    function logout() {
+        sessionStorage.clear();
+        navigate('/')
+    }
+
     return (
-        <>
-            <Loader type="triangle"/>
-        </>
+        <></>
     );
 }
 

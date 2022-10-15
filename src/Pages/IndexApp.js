@@ -61,9 +61,10 @@ function IndexApp() {
                         <div className="col-span-2 w-full grid">
                             <label htmlFor="my-modal-4" className="btn btn-primary justify-self-center md:justify-self-start">Ajouter une fleur</label>
                         </div>
-                        {flowers.map((flower, index) => (
-                            <FlowerCard key={index} flower={flower} />
-                        ))}
+                        {flowers ? (
+                            flowers.map((flower, index) => (
+                                    <FlowerCard key={index} flower={flower} />
+                                ))):null}
                     </div>
                 ) }
             <AddFlowerModal setChangeMade={setChangeMade}/>
