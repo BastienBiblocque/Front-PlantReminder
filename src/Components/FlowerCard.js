@@ -34,7 +34,7 @@ function FlowerCard(props) {
                     </div>
                     <div className="flex flex-col justify-center">
                         <p className="text-sm text-gray-500">Prochaine arrosage</p>
-                        <p className="text-lg font-bold">{props.flower.next.toDateString()}</p>
+                        <p className="text-lg font-bold">{props.flower.nextWatering.substring(0,10)}</p>
                     </div>
                 </div>
             </div>
@@ -46,11 +46,6 @@ FlowerCard.defaultProps = {
     background: "bg-white",
     icon: "",
     color: "#ffffff",
-    flower:{
-        name:"Fleur",
-        description:"Plante du salon",
-        next: new Date()
-    }
 }
 
 export default FlowerCard;
