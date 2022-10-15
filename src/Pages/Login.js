@@ -35,6 +35,7 @@ function Login() {
         userData.jwt = response.data.token
         sessionStorage.setItem("userData", JSON.stringify(userData));
         navigate('/');
+        console.log(userData);
     }
 
     function throwFormError(){
