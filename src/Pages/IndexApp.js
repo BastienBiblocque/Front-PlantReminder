@@ -55,9 +55,11 @@ function IndexApp() {
         <div className="flex">
             <UserData setIsLog={setIsLog} setUserData={setUserData}/>
             {isLoading ?
+                <div className="space-y-4 mx-auto z-20 pb-16">
                     <Loader type="triangle"/>
+                </div>
                 : (
-                    <div className="pt-16 space-y-4 gap-4 w-full px-4 md:grid md:grid-cols-2 md:space-y-0 z-20 pb-16">
+                    <div className="space-y-4 gap-4 w-full px-4 md:grid md:grid-cols-2 md:space-y-0 z-20 pb-16">
                         <div className="col-span-2 w-full grid">
                             <label htmlFor="my-modal-4" className="btn btn-primary justify-self-center md:justify-self-start">Ajouter une fleur</label>
                         </div>

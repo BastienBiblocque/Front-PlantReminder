@@ -20,14 +20,16 @@ function AppLayout() {
     },[isLog])
 
     return (
-        <div className="grid min-h-screen ">
+        <div className="grid">
             <UserData setIsLog={setIsLog} setUserData={setUserData}/>
             <NotificationContainer/>
             <Navbar userData={userData} />
             <div className="w-screen h-screen fixed bottom-0">
                 <svg className="absolute bottom-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#75a083" fillOpacity="1" d="M0,32L80,58.7C160,85,320,139,480,160C640,181,800,171,960,149.3C1120,128,1280,96,1360,80L1440,64L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
             </div>
-            <Outlet />
+            <div className="pt-16">
+                <Outlet />
+            </div>
         </div>
     );
 }

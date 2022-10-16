@@ -8,6 +8,7 @@ import IndexLogin from "./Pages/IndexLogin";
 import AppLayout from "./Components/Layout/App";
 import IndexApp from "./Pages/IndexApp";
 import Logout from "./Pages/Logout";
+import Profil from "./Pages/Profil";
 
 export default function App() {
     return (
@@ -20,6 +21,7 @@ export default function App() {
             <Route path="/app" element={<AppLayout />}>
                 <Route index element={<IndexApp />} />
                 <Route path="logout" element={<Logout />} />
+                <Route path="profil" element={<Profil />} />
 
             </Route>
             <Route path="*" element={<QuatreCentQuatre />} />

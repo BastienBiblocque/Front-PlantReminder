@@ -9,7 +9,7 @@ function Navbar(props) {
         <>
             <div className="navbar bg-base-100 fixed top-0 z-50">
                 <div className="flex-1">
-                    <a className="btn btn-ghost normal-case text-xl text-primary">Plant Reminder</a>
+                    <a className="btn btn-ghost normal-case text-xl text-primary" onClick={()=>{navigate('/app')}}>Plant Reminder</a>
                 </div>
                 <div className="flex-none">
                     {props.userData ? (
@@ -24,7 +24,7 @@ function Navbar(props) {
                         <ul tabIndex="0"
                             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             <li>
-                                <a className="justify-between">
+                                <a className="justify-between" onClick={()=>{navigate('/app/profil')}}>
                                     Profil
                                 </a>
                             </li>
